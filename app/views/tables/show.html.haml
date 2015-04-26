@@ -1,0 +1,18 @@
+%p#notice= notice
+%ul.list-group
+  %li.list-group-item
+    %span.badge= @table.number
+    Number:
+  %li.list-group-item
+    %span.badge= @table.notes
+    Notes:
+  %li.list-group-item
+    %span.badge= @table.created_at.to_formatted_s :short
+    Created at:
+  %li.list-group-item
+    %span.badge= @table.updated_at.to_formatted_s :short
+    Updated at:
+
+= link_to 'Edit', edit_table_path(@table)
+\|
+= link_to 'Back', tables_path

@@ -1,0 +1,24 @@
+%h1 Listing tables
+
+%table.table
+  %thead
+    %tr
+      %th Number
+      %th Notes
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tables.each do |table|
+      %tr
+        %td= table.number
+        %td= table.notes
+        %td
+          = link_to glyph(:eye_open), table
+          = link_to glyph(:pencil), table
+          = link_to glyph(:remove), table, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Table', new_table_path

@@ -1,0 +1,12 @@
+= bootstrap_form_for @reservation, inline_errors: false, html: { class: 'form-inline' } do |f|
+  = f.alert_message 'Please fix the errors below.'
+
+  = f.collection_select :table_id, Table.all, :id, :number
+  = f.text_field :start_time, class: 'datetime-picker', append: glyph(:dashboard), |
+  value: @reservation.start_time.to_formatted_s(:long) if @reservation.start_time.present?
+  -#.input-group-addon
+  -#  %span.glyphicon.glyphicon-dashboard
+  = f.text_field :end_time, class: 'datetime-picker', append: glyph(:dashboard), |
+    value: @reservation.end_time.to_formatted_s(:long) if @reservation.end_time.present?
+  .form-group
+    = f.submit 'Save'

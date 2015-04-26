@@ -1,0 +1,21 @@
+%p#notice= notice
+%ul.list-group
+  %li.list-group-item
+    %span.badge= @reservation.table.number
+    Table:
+  %li.list-group-item
+    %span.badge= @reservation.start_time.to_formatted_s :short
+    Start:
+  %li.list-group-item
+    %span.badge= @reservation.end_time.to_formatted_s :short
+    End:
+  %li.list-group-item
+    %span.badge= @reservation.created_at.to_formatted_s :short
+    Created at:
+  %li.list-group-item
+    %span.badge= @reservation.updated_at.to_formatted_s :short
+    Updated at:
+
+= link_to 'Edit', edit_reservation_path(@reservation)
+\|
+= link_to 'Back', reservations_path

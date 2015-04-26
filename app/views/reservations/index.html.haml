@@ -1,0 +1,24 @@
+%h1 Listing reservations
+
+%table.table
+  %thead
+    %tr
+      %th Number
+      %th Start time
+      %th End time
+      %th.actions
+
+  %tbody
+    - @reservations.each do |reservation|
+      %tr
+        %td= reservation.table.number
+        %td= reservation.start_time.to_formatted_s :short
+        %td= reservation.end_time.to_formatted_s :short
+        %td
+          = link_to glyph(:eye_open), reservation
+          = link_to glyph(:pencil), edit_reservation_path(reservation)
+          = link_to glyph(:remove), reservation, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Reservation', new_reservation_path

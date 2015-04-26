@@ -1,0 +1,1 @@
+json.extract! @reservation, :id, :table_id, :start, :end, :created_at, :updated_at
