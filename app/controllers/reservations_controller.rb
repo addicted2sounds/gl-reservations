@@ -15,6 +15,10 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = Reservation.new
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'modal_form' }
+    end
   end
 
   # GET /reservations/1/edit
