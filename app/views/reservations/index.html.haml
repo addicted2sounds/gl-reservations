@@ -14,10 +14,10 @@
         %td= reservation.table.number
         %td= reservation.start_time.to_formatted_s :short
         %td= reservation.end_time.to_formatted_s :short
-        %td{data: { no_turbolink: 'true' }}
+        %td
           = link_to glyph(:eye_open), reservation
           = link_to glyph(:pencil), edit_reservation_path(reservation),
-            data: { toggle: 'modal', target: '#ajax-modal' }
+            data: {target: '#ajax-modal', toggle: 'modal '}
           = link_to glyph(:remove), reservation, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br

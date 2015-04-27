@@ -4,10 +4,9 @@
 #= require moment
 #= require bootstrap-datetimepicker
 #= require bootstrap.modal-form.js
+#= require turbolinks
 #= require_tree .
-# require turbolinks
-$(document).on 'ready', ->
+$(document).on 'page:change', ->
   $('#ajax-modal').modalForm()
-  console.log('1')
   $(document).off('page:change')
 
