@@ -68,10 +68,10 @@
 
         var targetLink = '[data-target=' + this.selector + ']';
         $(document).on('click', targetLink, function(e) {
-                e.preventDefault();
-                var url = $(this).data('href') || $(this).attr('href');
-                modalForm.load(url);
-            });
+            e.preventDefault();
+            var url = $(this).data('href') || $(this).attr('href');
+            modalForm.load(url);
+        });
 
         $(document).on('submit', this.find('form'), function(e) {
             e.preventDefault();
