@@ -5,10 +5,9 @@
     var modalForm = {
         settings: {},
         addLoader: function() {
-            //console.log('add loader');
         },
+
         removeLoader: {
-        //
         },
 
         addContent: function(data) {
@@ -19,9 +18,11 @@
         load: function(url) {
             $.ajax({
                 url: url,
+                accepts: this.settings.ajax.accepts,
                 dataType: this.settings.ajax.dataType,
                 beforeSend: this.addLoader,
-                success: this.addContent
+                success: this.addContent,
+                error: function() { alert('Error occured'); }
             })
         }
     };
@@ -30,7 +31,10 @@
         modalForm.modal = this;
         modalForm.settings = $.extend({
             ajax: {
-                dataType: 'script'
+                accepts: {
+                    html: 'text/javascript'
+                },
+                dataType: 'html'
             },
             selector: {
                 content: '.modal-content'

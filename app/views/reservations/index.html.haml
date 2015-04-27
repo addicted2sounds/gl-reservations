@@ -16,7 +16,8 @@
         %td= reservation.end_time.to_formatted_s :short
         %td
           = link_to glyph(:eye_open), reservation
-          = link_to glyph(:pencil), edit_reservation_path(reservation)
+          = link_to glyph(:pencil), edit_reservation_path(reservation), |
+            data: {toggle: 'modal', target: '#ajax-modal'}
           = link_to glyph(:remove), reservation, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br

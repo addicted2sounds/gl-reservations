@@ -33,3 +33,8 @@ body {
     margin-right: 5px;
   }
 }
+.modal-dialog {
+  .modal-footer {
+    clear: both;
+  }
+}

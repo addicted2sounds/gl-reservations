@@ -1,1 +1,19 @@
-123123
+= bootstrap_form_for @reservation, inline_errors: false, layout: :horizontal do |f|
+  .modal-header
+    %button.close{ type: :button, data: { dismiss: :modal }, aria: { hidden: true } } &times;
+    =t 'Reservation Details'
+  .modal-body
+    = f.alert_message 'Please fix the errors below.'
+    .col-sm-4
+      .form-field
+        = f.collection_select :table_id, Table.all, :id, :number
+    .col-sm-8
+      .form-field
+        = f.text_field :start_time, class: 'datetime-picker', append: glyph(:dashboard),
+          value: (@reservation.start_time.to_formatted_s(:long) if @reservation.start_time.present?)
+      .form-field
+        = f.text_field :end_time, class: 'datetime-picker', append: glyph(:dashboard),
+          value: (@reservation.end_time.to_formatted_s(:long) if @reservation.end_time.present?)
+  .modal-footer
+    %button.btn.btn-primary=t 'Save'
+    %button.btn.btn-default{data: { dismiss: 'modal' }}=t 'Close'

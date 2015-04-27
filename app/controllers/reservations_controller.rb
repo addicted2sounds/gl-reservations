@@ -17,12 +17,16 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new
     respond_to do |format|
       format.html
-      format.js { render partial: 'modal_form' }
+      format.js { render partial: 'modal_form', status: :ok }
     end
   end
 
   # GET /reservations/1/edit
   def edit
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'modal_form', status: :ok }
+    end
   end
 
   # POST /reservations
