@@ -41,6 +41,7 @@ class ReservationsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        format.js { render partial: 'modal_form', status: :unprocessable_entity }
       end
     end
   end
@@ -52,6 +53,7 @@ class ReservationsController < ApplicationController
       if @reservation.update(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
+        format.js { render action: :show }
       else
         format.html { render :edit }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }

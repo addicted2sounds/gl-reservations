@@ -1,28 +1,32 @@
 (function($) {
     "use strict";
 
-
     var modalForm = {
         settings: {},
         addLoader: function() {
         },
-
         removeLoader: {
         },
-
         addContent: function(data) {
             modalForm.modal.find(modalForm.settings.selector.content).html(data);
             modalForm.modal.modal('show');
+            modalForm.modal.trigger('content-ready.bs.modal')
         },
-        submit: function(url, method) {
+        submit: function(url, data, method) {
             $.ajax({
                 url: url,
                 method: method,
+                data: data,
+                context: this,
                 accepts: this.settings.ajax.accepts,
                 dataType: this.settings.ajax.dataType,
                 beforeSend: this.addLoader,
                 success: this.addContent,
-                error: function() { alert('Error occurred'); }
+                statusCode: {
+                    422: function(data) {
+                        modalForm.addContent(data.responseText);
+                    }
+                }
             })
         },
         load: function(url) {
@@ -32,8 +36,16 @@
                 dataType: this.settings.ajax.dataType,
                 beforeSend: this.addLoader,
                 success: this.addContent,
-                error: function() { alert('Error occurred'); }
+                error: this.error
             })
+        },
+
+        error: function() {
+            this.addContent('Some error occurred');
+        },
+
+        refreshPage: function() {
+            document.location.reload();
         }
     };
 
@@ -54,8 +66,8 @@
             }
         }, options);
 
-        $('[data-target=' + this.selector + ']')//.filter('[data-toggle="modal"]')
-            .on('click', function(e) {
+        var targetLink = '[data-target=' + this.selector + ']';
+        $(document).on('click', targetLink, function(e) {
                 e.preventDefault();
                 var url = $(this).data('href') || $(this).attr('href');
                 modalForm.load(url);
@@ -63,8 +75,9 @@
 
         $(document).on('submit', this.find('form'), function(e) {
             e.preventDefault();
-            var url = e.target.action;
-            modalForm.submit(url, e.target.method);
+            var form = e.target;
+            var url = $(form).attr('action');
+            modalForm.submit(url, $(form).serialize(), e.target.method);
         });
         //return this;
     };
