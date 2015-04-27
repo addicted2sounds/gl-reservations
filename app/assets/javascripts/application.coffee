@@ -6,7 +6,7 @@
 #= require bootstrap-datetimepicker
 #= require bootstrap.modal-form.js
 #= require_tree .
-$(document).on 'page:change', ->
+$(document).on 'ready', ->
   $('#ajax-modal').modalForm()
 #  $('[data-target="' + target + '"]').click (event)->
 #    event.preventDefault()
