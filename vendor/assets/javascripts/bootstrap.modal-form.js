@@ -21,7 +21,10 @@
                 accepts: this.settings.ajax.accepts,
                 dataType: this.settings.ajax.dataType,
                 beforeSend: this.addLoader,
-                success: this.addContent,
+                success: function(data) {
+                    modalForm.addContent(data);
+                    modalForm.refreshPage();
+                },
                 statusCode: {
                     422: function(data) {
                         modalForm.addContent(data.responseText);
@@ -45,7 +48,8 @@
         },
 
         refreshPage: function() {
-            document.location.reload();
+            console.log('refresh');
+            Turbolinks.visit(document.location);
         }
     };
 
