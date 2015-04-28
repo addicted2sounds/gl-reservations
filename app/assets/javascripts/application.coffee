@@ -8,5 +8,4 @@
 #= require_tree .
 $(document).on 'page:change', ->
   $('#ajax-modal').modalForm()
-  $(document).off('page:change')
 

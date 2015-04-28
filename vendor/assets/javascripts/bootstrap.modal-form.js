@@ -78,19 +78,23 @@
         }, options);
 
         var targetLink = '[data-target=' + this.selector + ']';
-        $(document).on('click', targetLink, function(e) {
-            e.preventDefault();
-            var url = $(this).data('href') || $(this).attr('href');
-            modalForm.load(url);
-        });
 
-        $(document).on('submit', this.find('form'), function(e) {
-            e.preventDefault();
-            var form = e.target;
-            var url = $(form).attr('action');
-            modalForm.submit(url, $(form).serialize(), e.target.method);
-        });
-        //return this;
+        if (!$(document).data('bs.modal-form')) {
+            $(document).on('click', targetLink, function (e) {
+                e.preventDefault();
+                var url = $(this).data('href') || $(this).attr('href');
+                modalForm.load(url);
+            });
+
+            $(document).on('submit', this.find('form'), function (e) {
+                e.preventDefault();
+                var form = e.target;
+                var url = $(form).attr('action');
+                modalForm.submit(url, $(form).serialize(), e.target.method);
+            });
+
+            $(document).data('bs.modal-form', true);
+        }
     };
 
 
