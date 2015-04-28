@@ -1,0 +1,11 @@
+= bootstap_form_for @table, html: {class: 'form-horizontal'} do |f|
+  .modal-header
+    %button.close{ type: :button, data: { dismiss: :modal }, aria: { hidden: true } } &times;
+    =t 'Table Details'
+  .modal-body
+    = f.alert_message 'Please fix the errors below.'
+    = f.number_field :number, class: 'form-control'
+    = f.text_area :notes, class: 'form-control'
+  .modal-footer
+    %button.btn.btn-primary=t 'Save'
+    %button.btn.btn-default{data: { dismiss: 'modal' }}=t 'Close'
