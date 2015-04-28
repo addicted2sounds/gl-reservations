@@ -44,7 +44,6 @@ class ReservationsController < ApplicationController
         format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
         format.json { render :show, status: :created, location: @reservation }
         format.js { render partial: 'modal_show', status: :ok }
-        # format.js { render action: :show }
       else
         format.html { render :new }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
@@ -61,7 +60,6 @@ class ReservationsController < ApplicationController
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
         format.js { render partial: 'modal_show', status: :ok }
-        # format.js { render action: :show }
       else
         format.html { render :edit }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }

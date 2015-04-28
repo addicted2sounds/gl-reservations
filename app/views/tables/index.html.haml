@@ -16,9 +16,9 @@
         %td= table.notes
         %td
           = link_to glyph(:eye_open), table
-          = link_to glyph(:pencil), table
+          = link_to glyph(:pencil), table, data: {target: '#ajax-modal', toggle: 'modal '}
           = link_to glyph(:remove), table, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Table', new_table_path
+= link_to 'New Table', new_table_path, data: {target: '#ajax-modal', toggle: 'modal '}

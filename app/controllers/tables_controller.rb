@@ -15,10 +15,18 @@ class TablesController < ApplicationController
   # GET /tables/new
   def new
     @table = Table.new
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'modal_form', status: :ok }
+    end
   end
 
   # GET /tables/1/edit
   def edit
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'modal_form', status: :ok }
+    end
   end
 
   # POST /tables
@@ -30,9 +38,11 @@ class TablesController < ApplicationController
       if @table.save
         format.html { redirect_to @table, notice: 'Table was successfully created.' }
         format.json { render :show, status: :created, location: @table }
+        format.js { render partial: 'modal_show', status: :ok }
       else
         format.html { render :new }
         format.json { render json: @table.errors, status: :unprocessable_entity }
+        format.js { render partial: 'modal_form', status: :unprocessable_entity }
       end
     end
   end
@@ -44,9 +54,11 @@ class TablesController < ApplicationController
       if @table.update(table_params)
         format.html { redirect_to @table, notice: 'Table was successfully updated.' }
         format.json { render :show, status: :ok, location: @table }
+        format.js { render partial: 'modal_show', status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @table.errors, status: :unprocessable_entity }
+        format.js { render partial: 'modal_form', status: :unprocessable_entity }
       end
     end
   end
