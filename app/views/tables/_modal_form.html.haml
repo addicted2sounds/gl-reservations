@@ -1,4 +1,4 @@
-= bootstap_form_for @table, html: {class: 'form-horizontal'} do |f|
+= bootstrap_form_for @table, layout: :horizontal do |f|
   .modal-header
     %button.close{ type: :button, data: { dismiss: :modal }, aria: { hidden: true } } &times;
     =t 'Table Details'
