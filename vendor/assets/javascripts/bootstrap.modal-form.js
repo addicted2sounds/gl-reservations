@@ -5,7 +5,7 @@
         settings: {},
         addLoader: function() {
         },
-        removeLoader: {
+        removeLoader: function() {
         },
         addContent: function(data) {
             modalForm.modal.find(modalForm.settings.selector.content).html(data);
@@ -22,8 +22,12 @@
                 dataType: this.settings.ajax.dataType,
                 beforeSend: this.addLoader,
                 success: function(data) {
-                    modalForm.addContent(data);
                     modalForm.refreshPage();
+                    if (modalForm.settings.closeOnSuccessSubmit) {
+                        modalForm.modal.modal('hide');
+                    } else {
+                        modalForm.addContent(data);
+                    }
                 },
                 statusCode: {
                     422: function(data) {
@@ -44,12 +48,13 @@
         },
 
         error: function() {
+            // place code to show error
             this.addContent('Some error occurred');
         },
 
         refreshPage: function() {
-            console.log('refresh');
-            Turbolinks.visit(document.location);
+            // place code to refresh page
+            document.location.reload();
         }
     };
 
@@ -65,9 +70,11 @@
             selector: {
                 content: '.modal-content'
             },
+            closeOnSuccessSubmit: true,
             callbacks: {
-                beforeAjax: modalForm.addLoader
-            }
+                beforeAjax: modalForm.addLoader,
+                onAjaxComplete: modalForm.removeLoader
+            },
         }, options);
 
         var targetLink = '[data-target=' + this.selector + ']';
